@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "ccodeparse.h": "c",
+        "unittestgenerator.h": "c"
+    }
+}
