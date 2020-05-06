@@ -16,7 +16,11 @@
 extern "C" {
 #endif
 
+#include <stdio.h>
 #include <stdbool.h>
+#include <stdarg.h>
+
+#define SL_ErrorMsg(format, ...)  SL_StringFormatPrint(stderr, (format), __VA_ARGS__)
 
 /**
  * \brief 删除str字串中出现在trim字串中的字符
@@ -112,7 +116,7 @@ int SL_StringWithStart(char *str, char *starts);
  * \return true str是目录路径
  * \return false str不是目录路径
  */
-bool SL_StringIsDirPath(char *str);
+bool SL_StringIsDirPath(const char *str);
 
 /**
  * \brief 检查str字串是否为文件路径
@@ -121,7 +125,7 @@ bool SL_StringIsDirPath(char *str);
  * \return true str是文件路径
  * \return false str不是文件路径
  */
-bool SL_StringIsFilePath(char *str);
+bool SL_StringIsFilePath(const char *str);
 
 /**
  * \brief 以delim字符串中的字符分割str1, str2字符串, 
@@ -176,6 +180,24 @@ char** SL_StringArrayLog(const char *str, char ***array, int *count);
  * \return false 内存释放失败
  */
 bool SL_StringArrayFree(char ***array, int *count);
+
+/**
+ * \brief 输出字符串数组到文件指针fp指向的文件
+ * 
+ * \param fp 文件指针
+ * \param array 字符串数组
+ * \param count 字符串数组元素的个数
+ */
+void SL_StringArrayPrint(FILE *fp, char **array, int count);
+
+/**
+ * \brief 格式化输出字符串到文件指针fp指向的文件
+ * 
+ * \param fp 文件指针
+ * \param format 格式化字符串，参考printf函数
+ * \param ... 字符串序列
+ */
+void SL_StringFormatPrint(FILE *fp, char *format, ...);
 
 #ifdef __cplusplus
 }

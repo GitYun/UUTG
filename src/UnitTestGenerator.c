@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <sys/stat.h>
 #include "mpc.h"
+#include "utils.h"
 #include "stringHelper.h"
 #include "CCodeParse.h"
 #include "GeneratorOutputPrivate.h"
@@ -52,20 +53,20 @@ void UnitTestGenerator(char *inputPath, char *outputPath, char *suffix)
     }
     CCP_Free(&ppsFiles, &filesCount);
     
-    CCP_SetCwd(outputPath);
-    CCP_GetDirFileInfo(NULL, &ppsFiles, &filesCount, "_Test", ".c");
+    GetDirentInfo(outputPath, &ppsFiles, &filesCount, "_Test.c");
 
-    tTestGroup *group = calloc(1, sizeof(tTestGroup));
+    tTestGroup *group = NULL;
     int groupCount = GetTestFuncDeclare(ppsFiles, filesCount, &ppsFunctions, &funcCount, &group);
-    CCP_PrintfMessage(ppsFiles, filesCount);
-    CCP_PrintfMessage(ppsFunctions, funcCount);
+    SL_StringArrayPrint(stdout, ppsFiles, filesCount);
+    SL_StringArrayPrint(stdout, ppsFunctions, funcCount);
 
+    CCP_SetCwd(outputPath);
     RunnerGenerator_GeneratorRunnerFile(&group, groupCount, "UnityTestRunner.c");
     RunnerGenerator_GeneratorMainFile(&group, groupCount, outputPath, "main_temp.c");
     PrintGroupMessage(&group, groupCount);
 
     RunnerGenerator_TestGroupAndTestnameDestory(&group, groupCount);
-    CCP_Free(&ppsFunctions, &funcCount);
+    SL_StringArrayFree(&ppsFunctions, &funcCount);
     CCP_Free(&ppsFiles, &filesCount);
     free(outputPath);
 }

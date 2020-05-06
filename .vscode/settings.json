@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "ccodeparse.h": "c",
-        "unittestgenerator.h": "c"
+        "unittestgenerator.h": "c",
+        "stdio.h": "c",
+        "dirent.h": "c",
+        "stat.h": "c",
+        "cstdlib": "c"
     }
 }

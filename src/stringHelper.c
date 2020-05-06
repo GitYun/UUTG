@@ -12,7 +12,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <stdarg.h>
 #include <string.h>
 #include <sys/stat.h>
 #include "stringHelper.h"
@@ -195,7 +194,7 @@ int SL_StringWithStart(char *str, char *starts)
 }
 
 // 检查str字串是否为目录路径
-bool SL_StringIsDirPath(char *str)
+bool SL_StringIsDirPath(const char *str)
 {
     if (!isStringVaild(1, str))
     {
@@ -209,7 +208,7 @@ bool SL_StringIsDirPath(char *str)
 }
 
 // 检查str字串是否为文件路径
-bool SL_StringIsFilePath(char *str)
+bool SL_StringIsFilePath(const char *str)
 {
     if (!isStringVaild(1, str))
     {
@@ -383,6 +382,35 @@ bool SL_StringArrayFree(char ***array, int *count)
     *array = NULL;
     *count = 0;
     return true;
+}
+
+// 输出字符串数组到文件指针fp指向的文件
+void SL_StringArrayPrint(FILE *fp, char **array, int count)
+{
+    if (array == NULL || count < 1)
+        return;
+
+    fprintf(fp, "\n\nString Count: %d\n", count);
+    for (int idx = 0; idx < count; ++idx)
+    {
+        if (array[idx])
+        {
+            fprintf(fp, "%s\n", array[idx]);
+        }
+    }
+}
+
+// 格式化输出字符串到文件指针fp指向的文件
+void SL_StringFormatPrint(FILE *fp, char *format, ...)
+{
+    va_list va = NULL;
+    va_start(va, format);
+
+    if (va == NULL || fp == NULL || format == NULL)
+        return;
+
+    fprintf(fp, format, va);
+    va_end(va);
 }
 
 static bool isStringVaild(int n, ...)

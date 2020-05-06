@@ -151,6 +151,11 @@ int GetGroupAndTestName(char **ppsFuncs, int count, struct _test_group_ **ppsTes
 static void GetGroupNameAndTestName(mpc_ast_t *ast, struct _test_group_ **ppsTestGroup, int *groupCount)
 {
     struct _test_group_ *group = *ppsTestGroup;
+    if (group == NULL)
+    {
+        group = calloc(1, sizeof(tTestGroup));
+        *groupCount = 0;
+    }
 
     bool bGroupExisted = false;
     int groupIdx = 0;
