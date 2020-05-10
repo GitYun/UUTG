@@ -1,7 +1,7 @@
 /**
- * \file GeneratorOutputPrivate.c
+ * \file csfp.c
  * \author vEmagic (admin@vemagic.com)
- * \brief 
+ * \brief C Source File Printer
  * \version 0.0.1
  * \date 2020-04-19
  * 
@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-#include "GeneratorOutputPrivate.h"
-#include "GeneratorOutputSpy.h"
+#include "csfp.h"
+#include "uutg_spy.h"
 
 static char *lineFeed = "\n";
 static FILE *fp = NULL;

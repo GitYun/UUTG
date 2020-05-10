@@ -1,5 +1,5 @@
 #include "unity_fixture.h"
-#include "GeneratorOutputPrivate.h"
+#include "csfp.h"
 
 TEST_GROUP(GeneratorOutput);
 

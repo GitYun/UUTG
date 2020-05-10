@@ -1,7 +1,7 @@
 /**
- * \file GeneratorOutputSpy.h
+ * \file uutg_spy.h
  * \author vEmagic (admin@vemagic.com)
- * \brief 
+ * \brief Unity Unit Test Generator Spyer Header
  * \version 0.0.1
  * \date 2020-04-19
  * 
@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef _GENERATOR_OUTPUT_H
-#define _GENERATOR_OUTPUT_H
+#ifndef UUTG_SPY_H
+#define UUTG_SPY_H
 
 //#define fwrite_spy  fwrite
 
@@ -73,4 +73,4 @@ int OutputSpy_GetLineCount(void);
  */
 int OutputSpy_GetCharCount(void);
 
-#endif
+#endif // UUTG_SPY_H

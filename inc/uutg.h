@@ -1,7 +1,7 @@
 /**
- * \file MocksGenerator.h
+ * \file uutg.h
  * \author vEmagic (admin@vemagic.com)
- * \brief 
+ * \brief Unity Unit Test Generator Header
  * \version 0.0.1
  * \date 2020-04-19
  * 
@@ -9,19 +9,26 @@
  * 
  */
 
-#ifndef UNITY_TEST_GENERATOR_H
-#define UNITY_TEST_GENERATOR_H
+#ifndef UUTG_H
+#define UUTG_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-char* readFile(FILE* fp);
+typedef struct _test_group_
+{
+    char *group; // test group name
+    char **name; // test name array
+    int nameCount;
+} tTestGroup;
+
 void UnitTestGenerator(char *inputPath, char *outputPath, char *suffix);
+
 void GetFuncsDeclare(const char *filename, char ***ppsFuncs, int *count);
 
 #ifdef __cplusplus
 }
 #endif // __cplusplus
 
-#endif // UNITY_TEST_GENERATOR_H
+#endif // UUTG_H

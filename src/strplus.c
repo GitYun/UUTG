@@ -1,7 +1,7 @@
 /**
- * \file stringHelper.c
+ * \file strplus.c
  * \author vEmagic (admin@vemagic.com)
- * \brief 
+ * \brief String Helper Base On the string.h
  * \version 0.0.1
  * \date 2020-04-25
  * 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include "stringHelper.h"
+#include "strplus.h"
 
 static bool isStringVaild(int n, ...);
 
@@ -89,26 +89,16 @@ char* SL_StringReplace(char *str, char *target, const char *replace)
 // 在str字串后追加append字串
 char* SL_StringAppend(char *str, ...)
 {
-    // if (!isStringVaild(1, str))
-    // {
-    //     return NULL;
-    // }
+    if (!isStringVaild(1, str))
+    {
+        return NULL;
+    }
 
     va_list va;
     va_start(va, str);
 
-    int length = 0;
-    char *dst = NULL;
-    if (str)
-    {
-        length = strlen(str) + 1;
-        dst = strdup(str);
-    }
-    else
-    {
-        length = 1;
-        dst = strdup("");
-    }
+    int length = strlen(str) + 1;
+    char *dst = strdup(str);
 
     char *append = NULL;
     while ((append = va_arg(va, char *)) != NULL)
@@ -370,7 +360,13 @@ bool SL_StringArrayFree(char ***array, int *count)
     
     char **item = *array;
     int idx = 0;
-    while (item[idx] != NULL && ++idx);
+    // while (item[idx] != NULL && ++idx);
+    char *tmp = item[0];
+    while (tmp != NULL)
+    {
+        ++idx;
+        tmp = item[idx];
+    }
 
     while (--idx >= 0)
     {

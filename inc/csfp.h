@@ -1,7 +1,7 @@
 /**
- * \file GeneratorOutputPrivate.h
+ * \file csfp.h
  * \author vEmagic (admin@vemagic.com)
- * \brief 
+ * \brief C Source File Printer Header
  * \version 0.0.1
  * \date 2020-04-19
  * 
@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef _GENERATOR_OUTPUT_PRIVATE_H
-#define _GENERATOR_OUTPUT_PRIVATE_H
+#ifndef CSFP_H
+#define CSFP_H
 
 #include <assert.h>
 
@@ -82,4 +82,4 @@ void outputCFileFunctionEnd(FILE *fp, char *ends);
  */
 void outputCFileBlankLine(FILE *fp);
 
-#endif
+#endif // CSFP_H

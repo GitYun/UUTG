@@ -1,0 +1,32 @@
+#include "unity_fixture.h"
+#include "CCodeParse.h"
+#include "UnitTestGenerator.h"
+
+#define ROOT_PATH "F:\\WorkPath\\ProgramCode\\C\\UnitTestGenerator"
+static char *g_pcCwd = ROOT_PATH "\\inc";//"\\test\\resource"; //
+static char *g_pcPwd = NULL;
+
+TEST_GROUP($(group));
+
+TEST_SETUP($(group))
+{
+
+}
+
+TEST_TEAR_DOWN($(group))
+{
+
+}
+
+${ for (int i = 0; i < $(count); ++i) }$
+{{
+TEST($(group), $(name)[i])
+{
+
+}
+
+TEST_GROUP_RUNNER($(group))
+{
+    RUN_TEST_CASE($(group), $(name)[i]);
+}
+}}

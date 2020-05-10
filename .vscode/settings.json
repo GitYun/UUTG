@@ -5,6 +5,9 @@
         "stdio.h": "c",
         "dirent.h": "c",
         "stat.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "unitytestfuncname.h": "c",
+        "uutg.h": "c",
+        "csfp.h": "c"
     }
 }

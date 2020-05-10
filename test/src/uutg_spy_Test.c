@@ -1,6 +1,6 @@
 #include "unity_fixture.h"
 #include <string.h>
-#include "GeneratorOutputSpy.h"
+#include "uutg_spy.h"
 
 TEST_GROUP(GeneratorOutputSpy);
 

@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include "stringHelper.h"
+
+typedef struct {
+    char *opt;
+    char *long_opt;
+    bool optarg;
+    char *optval;
+    char *brief;
+} option_t;
+
+option_t cli[] = {
+    {"-n", "--name", 1, NULL, "your name"},
+    {"-e", "--email", 1, NULL, "your email"},
+    {"-h", "--help", 0, NULL, "hlep info"},
+    {"-c", NULL, 1, NULL, "config"}
+};
+
+int main(int argc, char **argv)
+{
+    int idx = 0;
+    while (++idx < argc)
+    {
+    ${ for (int i = 0; i < sizeof(cli)/sizeof(cli[0]); ++i) }$
+    {{
+        ${ if cli[i].opt ~= 'argv[idx]' || cli[i].long_opt ~= 'argv[idx]' }$
+        {{
+            ${ if cli[i].optarg == true }$
+            {{
+                SL_StringTrimLeadWhitespace(${cli[i]}$);
+                printf("name: %s\n", ${ it }$);
+            }}
+        }}
+    }}
+    }
+}

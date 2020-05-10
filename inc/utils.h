@@ -19,14 +19,14 @@ extern "C" {
 #include <stdbool.h>
 
 /**
- * \brief Get the Dirent Info object
+ * \brief 递归搜索给定目录下与keyword匹配到的文件名, 通过字母顺序排序并存储
  * 
- * \param dirPath 
- * \param filenames 
- * \param count 
- * \param keyword 
- * \return true 
- * \return false 
+ * \param dirPath 目录路径
+ * \param filenames 文件名缓存器
+ * \param count 文件数量
+ * \param keyword 文件名匹配关键字
+ * \return true 搜索成功
+ * \return false 搜索失败
  */
 bool GetDirentInfo(const char *dirPath, char ***filenames, int *count, const char *keyword);
 

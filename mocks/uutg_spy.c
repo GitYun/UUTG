@@ -1,7 +1,7 @@
 /**
- * \file GeneratorOutputSpy.c
+ * \file uutg_spy.c
  * \author vEmagic (admin@vemagic.com)
- * \brief 
+ * \brief Unity Unit Test Generator Spyer
  * \version 0.0.1
  * \date 2020-04-19
  * 
@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "unity_fixture_malloc_overrides.h"
-#include "GeneratorOutputPrivate.h"
+#include "uutg_spy.h"
 
 static char lineend = '\0';
 static char **lineMessage = NULL;

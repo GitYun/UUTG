@@ -1,7 +1,7 @@
 /**
- * \file stringHelper.h
+ * \file strplus.h
  * \author vEmagic (admin@vemagic.com)
- * \brief 
+ * \brief String Helper Header
  * \version 0.0.1
  * \date 2020-04-25
  * 
@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef STRINGHELPER_H
-#define STRINGHELPER_H
+#ifndef STR_PLUS_H
+#define STR_PLUS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -203,4 +203,4 @@ void SL_StringFormatPrint(FILE *fp, char *format, ...);
 }
 #endif // __cplusplus
 
-#endif // STRINGHELPER_H
+#endif // STR_PLUS_H

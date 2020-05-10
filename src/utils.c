@@ -13,12 +13,12 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <sys/stat.h>
-#include "stringHelper.h"
+#include "strplus.h"
 #include "utils.h"
 
 static int stringCompare(const void * p1, const void * p2);
 
-// Get the Dirent Info object
+// 递归搜索给定目录下与keyword匹配到的文件名, 通过字母顺序排序并存储
 bool GetDirentInfo(const char *dirPath, char ***filenames, 
                    int *count, const char *keyword)
 {
@@ -41,17 +41,11 @@ bool GetDirentInfo(const char *dirPath, char ***filenames,
         return false;
     }
 
-    char *fullDirPath = NULL;
-    if (SL_StringWithEnds((char *)dirPath, "\\/") < 0)
-        fullDirPath = SL_StringAppend((char *)dirPath, "/", NULL);
-    else
-        fullDirPath = strdup(dirPath);
-
     struct dirent *dirent;
     struct stat st;
-
     char *cwd = getcwd(NULL, 0);
     chdir(dirPath);
+
     while ((dirent = readdir(dir)) != NULL) // 获取目录信息
     {
         // 忽略当前目录与父目录
@@ -66,16 +60,14 @@ bool GetDirentInfo(const char *dirPath, char ***filenames,
         {
             if (strstr(dirent->d_name, keyword))
             {
-                ++*count;
-                if ((*filenames = realloc(*filenames, *count * sizeof(char *))) != NULL)
-                {
-                    (*filenames)[*count - 1] = SL_StringAppend(fullDirPath, dirent->d_name, NULL);
-                }
+                char *tmp = SL_StringAppend((char *)dirPath, dirent->d_name, NULL);
+                SL_StringArrayLog(tmp, filenames, count);
+                free(tmp);
             }
         }
         else if (S_ISDIR(st.st_mode)) // 是目录, 则递归
         {
-            char* subDirPath = SL_StringAppend(fullDirPath, dirent->d_name, NULL);
+            char* subDirPath = SL_StringAppend((char *)dirPath, dirent->d_name, NULL);
             GetDirentInfo(subDirPath, filenames, count, keyword);
             free(subDirPath);
         }
@@ -85,7 +77,6 @@ bool GetDirentInfo(const char *dirPath, char ***filenames,
     qsort(*filenames, *count, sizeof(char *), stringCompare);
     chdir(cwd);
     free(cwd);
-    free(fullDirPath);
     return true;
 }
 

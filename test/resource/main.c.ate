@@ -1,0 +1,14 @@
+#include "unity_fixture.h"
+
+static void RunTestAll(void)
+{
+    ${ for (int i = 0; i < $(count); ++i) }$
+    {{
+    RUN_TEST_GROUP($(name));
+    }}
+}
+
+int main(int argc, char **argv)
+{
+    return UnitMain(argc, argv, RunTestAll);
+}
